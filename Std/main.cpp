@@ -88,12 +88,12 @@ int main()
                             std::cin>>auxint;
                             pedi.setnumero(auxint);
 
-                            puts("Insira o status do produto");
+                            puts("Insira o status do pedido");
                             std::cin.ignore();
                             std::getline(std::cin,auxstr);
                             pedi.setstatus(auxstr);
 
-                            //pedi.setdata();
+                            pedi.setdata();
                             pedi.setvalortotal();
                             //pedi.setcliente()
 
@@ -105,6 +105,7 @@ int main()
                             std::cin.ignore();
                             std::cin>>auxfloat;
                             itm.setpcounitario(auxfloat);
+                            itm.setvalortotal();
 
                             pedi.setitem(&itm);
 
