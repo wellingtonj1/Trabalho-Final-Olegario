@@ -5,6 +5,7 @@
 #include <QDate>
 #include "Item.h"
 
+
 class Pedido: public Pessoa
 {
 private:
@@ -28,6 +29,7 @@ public:
              <<pedid.objitem.getpcounitario()<<", Valor Total :"
              <<pedid.objitem.getvalortotal()<<std::endl;
 
+
         return saida;
     }
     void setnumero(int x){numero=x;}
@@ -37,7 +39,7 @@ public:
     float getvalortotal(){return valortotal;}
     void setstatus(std::string status){ this->status=status;}
     std::string getstatus(){return status;}
-    //void setdata(){data=QDate::currentDate();}
+    void setdata(){data=QDate::currentDate();}
     std::string getdata();
     void setitem(Item *aux){ objitem=*aux;}
     bool setcliente(Pessoa *aux)

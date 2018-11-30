@@ -13,7 +13,13 @@ private:
 
 public:
     Item();
-    void setproduto(Produto *aux){ objproduto=*aux;}
+    void setproduto(Produto *aux)
+    {
+        if(aux!=nullptr)
+        {
+            objproduto=*aux;
+        }
+    }
     int getquanti() { return quantidade;}
     float getpcounitario() { return pcounitario;}
     float getvalortotal() { return valortotal;}
