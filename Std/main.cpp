@@ -45,31 +45,31 @@ int main()
                             cin.ignore();
                             puts("Insira o codigo ");
                             std::getline(std::cin,auxstr);
-                            pess.setcodigo(auxstr);
+                            pfis.setcodigo(auxstr);
 
                             puts("Insira o logradouro");
                             std::getline(std::cin,auxstr);
-                            pess.setlogradouro(auxstr);
+                            pfis.setlogradouro(auxstr);
 
                             puts("Insira o setor ");
                             std::getline(std::cin,auxstr);
-                            pess.setsetor(auxstr);
+                            pfis.setsetor(auxstr);
 
                             puts("Insira o cidade");
                             std::getline(std::cin,auxstr);
-                            pess.setcidade(auxstr);
+                            pfis.setcidade(auxstr);
 
                             puts("Insira o estado");
                             std::getline(std::cin,auxstr);
-                            pess.setestado(auxstr);
+                            pfis.setestado(auxstr);
 
                             puts("Insira o email");
                             std::getline(std::cin,auxstr);
-                            pess.setemail(auxstr);
+                            pfis.setemail(auxstr);
 
                             puts("Insira o telefone ");
                             std::cin>>auxint;
-                            pess.settelefone(auxint);
+                            pfis.settelefone(auxint);
 
                             puts("Insira o cpf");
                             std::cin.ignore();
@@ -97,8 +97,7 @@ int main()
                             pedi.setvalortotal();
                             //pedi.setcliente()
 
-                            puts("Insira a quantidade de Itens");
-                            std::cin.ignore();
+                            puts("Insira a quantidade de Itens");                            
                             std::cin>>auxint;
                             itm.setquanti(auxint);
 
@@ -168,8 +167,10 @@ int main()
                             std::getline(std::cin,auxstr);
                             pjuri.setRazaoSocial(auxstr);
 
+
                             arqjuri<<pjuri;
                             arqjuri.close();
+
                         }
                         else
                         {
@@ -216,9 +217,11 @@ int main()
                 }
                 break;
 
+            default:
 
+                break;
         }
 
-    }while(escolha!=0||choose!=0);
+    }while(escolha!=0&&choose!=0);
 
 }

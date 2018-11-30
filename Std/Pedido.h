@@ -25,7 +25,7 @@ public:
              <<pedid.getdata()<<", Valor total :"
              <<pedid.valortotal<<", Quantidade :"
              <<pedid.objitem.getquanti()<<", Preço unitario :"
-             <<pedid.objitem.getpcounitario()<<", Valor Total"
+             <<pedid.objitem.getpcounitario()<<", Valor Total :"
              <<pedid.objitem.getvalortotal()<<std::endl;
 
         return saida;
@@ -37,7 +37,7 @@ public:
     float getvalortotal(){return valortotal;}
     void setstatus(std::string status){ this->status=status;}
     std::string getstatus(){return status;}
-    void setdata(){data=QDate::currentDate();}
+    //void setdata(){data=QDate::currentDate();}
     std::string getdata();
     void setitem(Item *aux){ objitem=*aux;}
     bool setcliente(Pessoa *aux)
