@@ -16,16 +16,15 @@ protected:
 public:
     Juridica();
     friend ostream& operator << (ostream& os, Juridica& Pessoa){
-        os  << "Dados: Codigo :"
-            << Pessoa.codigo    <<", Cnpj :"
-            << Pessoa.cnpj         <<", Razão social :"
-            << Pessoa.razaoSocial    <<", Nomecontato :"
-            << Pessoa.nomeContato    <<", Logradouro :"
-            << Pessoa.logradouro     <<", Setor :"
-            << Pessoa.setor          <<", Cidade :"
-            << Pessoa.cidade         <<", Estado :"
-            << Pessoa.estado         <<", Telefone :"
-            << Pessoa.telefone       <<", Email :"
+        os  << Pessoa.codigo    <<";"
+            << Pessoa.cnpj         <<";"
+            << Pessoa.razaoSocial    <<";"
+            << Pessoa.nomeContato    <<";"
+            << Pessoa.logradouro     <<";"
+            << Pessoa.setor          <<";"
+            << Pessoa.cidade         <<";"
+            << Pessoa.estado         <<";"
+            << Pessoa.telefone       <<";"
             << Pessoa.email          <<::endl;
         return os;
     }

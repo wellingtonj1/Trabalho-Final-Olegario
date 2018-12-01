@@ -20,13 +20,12 @@ public:
     Pedido();
     friend ostream& operator << (ostream& saida,Pedido& pedid)
     {
-        saida<<"Dados do Pedido--> Numero :"
-             <<pedid.numero<<", Status :"
-             <<pedid.status<<", Data :"
-             <<pedid.getdata()<<", Valor total :"
-             <<pedid.valortotal<<", Quantidade :"
-             <<pedid.objitem.getquanti()<<", Preço unitario :"
-             <<pedid.objitem.getpcounitario()<<", Valor Total :"
+        saida<<pedid.numero<<";"
+             <<pedid.status<<";"
+             <<pedid.getdata()<<";"
+             <<pedid.valortotal<<";"
+             <<pedid.objitem.getquanti()<<";"
+             <<pedid.objitem.getpcounitario()<<";"
              <<pedid.objitem.getvalortotal()<<std::endl;
 
 
@@ -34,27 +33,64 @@ public:
     }
     void setnumero(int x){numero=x;}
     int getnumero(){return numero;}
-    Pessoa getcliente(){return cliente;}
-    void setvalortotal(){;}
+    std::string getcliente(){return cliente.getcodigo();}
+    void setvalortotal(float x){valortotal=x;}
     float getvalortotal(){return valortotal;}
     void setstatus(std::string status){ this->status=status;}
     std::string getstatus(){return status;}
     void setdata(){data=QDate::currentDate();}
     std::string getdata();
     void setitem(Item *aux){ objitem=*aux;}
-    bool setcliente(Pessoa *aux)
+    void setcliente(std::string x)
     {
-        if(aux!=nullptr)
-        {
-            cliente=*aux;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        cliente.setcodigo(x);
     }
 
+    Pedido* criapedi(std::string linha)
+    {
+        Pedido* p=new Pedido();
+        std::string delimitador=";", atributo;
+        int pos=0;
+
+        atributo = linha.substr(0, linha.find(delimitador));
+        p->setnumero(std::stoi(atributo));
+        pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        atributo.erase();
+
+        atributo = linha.substr(0, linha.find(delimitador));
+        p->setstatus(atributo);
+        pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        atributo.erase();
+
+        atributo = linha.substr(0, linha.find(delimitador));
+        p->setvalortotal(std::stof(atributo));
+        pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        atributo.erase();
+
+        atributo = linha.substr(0, linha.find(delimitador));
+        p->objitem.setquanti(std::stoi(atributo));
+        pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        atributo.erase();
+
+        atributo = linha.substr(0, linha.find(delimitador));
+        p->objitem.setpcounitario(std::stof(atributo));
+        pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        atributo.erase();
+
+        atributo = linha.substr(0, linha.find(delimitador));
+        p->objitem.setvalortotal();
+        pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        atributo.erase();
+
+        return p;
+
+    }
 };
 
 #endif // PEDIDO_H

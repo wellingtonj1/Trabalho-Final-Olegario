@@ -14,11 +14,10 @@ public:
     Produto();
     friend ostream& operator << (ostream& saida,Produto &Product)
     {
-        saida<<"Dados do produto--> Codigo :"
-            <<Product.codigo<<", Descrição :"
-            <<Product.descricao<<", Preço :"
-            <<Product.preco<<", Quantidade :"
-            <<Product.quantidade<<std::endl;
+        saida<<Product.codigo<<";"
+             <<Product.descricao<<";"
+             <<Product.preco<<";"
+             <<Product.quantidade<<std::endl;
 
         return saida;
 
@@ -32,6 +31,7 @@ public:
     string getDescricao(){return descricao;}
     float getPreco(){return preco;}
     int getQuantidade(){return quantidade;}
+
 
 };
 

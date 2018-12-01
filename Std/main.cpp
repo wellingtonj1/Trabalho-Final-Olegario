@@ -11,19 +11,70 @@
 int main()
 {
     int escolha=0,choose=0;
-    Pesfisica pfis;
     Pessoa pess;
+    Pesfisica pfis;
     Juridica pjuri;
-    Item itm;
     Produto prod;
-    Pedido pedi;
     std::string auxstr;
     int auxint;
     float auxfloat;
     fstream arqfis,arqjuri,arqprod,arqpedi;
+    list<Item*> listaItems;
+    Item* itmbijeto=nullptr;
+    Item itm;
+    queue<Pedido*> filapedidos;
+    Pedido *pedibijeto=nullptr;
+    Pedido pedi;
+
+
+    string nomeArquivolist = "listaitems.txt", delimitador=";", linha;
+
+    ifstream arquivoi(nomeArquivolist.c_str());
+    if(!arqfis.is_open())
+    {
+        cout<<"--Arquivo Lista nao aberto--"<<endl;
+    }
+    else
+    {
+        getline(arquivoi, linha);
+        while(!arquivoi.eof())
+        {
+            itmbijeto= itmbijeto->criaitem(linha);
+            listaItems.push_back(itmbijeto);
+            itmbijeto=nullptr;
+            getline(arquivoi, linha);
+        }
+        arquivoi.close();
+        cout<<"==Arquivo lido com sucesso=="<<endl;
+    }
+
+    string nomeArquivofila = "filapedidos.txt", delimitadorpedidos=";", linhapedi;
+
+    ifstream arquivopedids(nomeArquivofila.c_str());
+    if(!arqfis.is_open())
+    {
+        cout<<"--Arquivo fila nao aberto--"<<endl;
+    }
+    else
+    {
+        getline(arquivopedids, linha);
+        while(!arquivopedids.eof())
+        {
+            pedibijeto= pedibijeto->criapedi(linhapedi);
+            filapedidos.push(pedibijeto);
+            pedibijeto=nullptr;
+            getline(arquivopedids,linhapedi);
+
+        }
+        arquivoi.close();
+        cout<<"==Arquivo lido com sucesso=="<<endl;
+    }
+
+
+
     do
     {
-        puts("1-Inserir cliente");
+        puts("1-Inserir ou remover cliente");
         puts("2-Inserir produto");
         puts("0-Sair");
         std::cin>>choose;
@@ -34,6 +85,8 @@ int main()
 
                 puts("1 - Fazer pedido para uma Pessoa Fisica ");
                 puts("2 - Fazer pedido para uma Pessoa Juridica \n0 - Para sair");
+                puts("3 - Excluir pessoa Fisica ");
+                puts("4 - Excluir pessoa Juridica ");
                 std::cin>>escolha;
                 switch (escolha)
                 {
@@ -46,6 +99,7 @@ int main()
                             puts("Insira o codigo ");
                             std::getline(std::cin,auxstr);
                             pfis.setcodigo(auxstr);
+                            pedi.setcliente(auxstr);
 
                             puts("Insira o logradouro");
                             std::getline(std::cin,auxstr);
@@ -94,8 +148,6 @@ int main()
                             pedi.setstatus(auxstr);
 
                             pedi.setdata();
-                            pedi.setvalortotal();
-                            //pedi.setcliente()
 
                             puts("Insira a quantidade de Itens");                            
                             std::cin>>auxint;
@@ -106,8 +158,14 @@ int main()
                             std::cin>>auxfloat;
                             itm.setpcounitario(auxfloat);
                             itm.setvalortotal();
+                            pedi.setvalortotal(itm.getvalortotal());
+
+                            puts("Insira o nome do Produto pedido");
+                            std::getline(std::cin,auxstr);
 
                             pedi.setitem(&itm);
+                            filapedidos.push(&pedi);
+                            listaItems.push_back(&itm);
 
                             arqfis<<pfis;
                             arqfis<<pedi;
@@ -129,6 +187,7 @@ int main()
                             puts("Insira o codigo ");
                             std::getline(std::cin,auxstr);
                             pjuri.setcodigo(auxstr);
+                            pedi.setcliente(auxstr);
 
                             puts("Insira o logradouro");
                             std::getline(std::cin,auxstr);
@@ -168,8 +227,36 @@ int main()
                             std::getline(std::cin,auxstr);
                             pjuri.setRazaoSocial(auxstr);
 
+                            puts("Insira o numero do pedido");
+                            std::cin>>auxint;
+                            pedi.setnumero(auxint);
+
+                            puts("Insira o status do pedido");
+                            std::cin.ignore();
+                            std::getline(std::cin,auxstr);
+                            pedi.setstatus(auxstr);
+
+                            pedi.setdata();
+
+
+
+                            puts("Insira a quantidade de Itens");
+                            std::cin>>auxint;
+                            itm.setquanti(auxint);
+
+                            puts("Insira o preço unitario do item");
+                            std::cin.ignore();
+                            std::cin>>auxfloat;
+                            itm.setpcounitario(auxfloat);
+                            itm.setvalortotal();
+
+                            listaItems.push_back(&itm);
+                            pedi.setitem(&itm);
+
+                            listaItems.push_back(&itm);
 
                             arqjuri<<pjuri;
+                            arqjuri<<pedi;
                             arqjuri.close();
 
                         }

@@ -19,16 +19,15 @@ public:
     Pesfisica();
     friend ostream& operator << (ostream& saida,Pesfisica& Pessoa)
     {
-       saida << "Dados: Codigo :"
-            << Pessoa.codigo <<", Nome :"
-            << Pessoa.nome       <<", Cpf :"
-            << Pessoa.cdpessoafis<<", Celular :"
-            << Pessoa.celular    <<", Logradouro :"
-            << Pessoa.logradouro <<", Setor :"
-            << Pessoa.setor      <<", Cidade :"
-            << Pessoa.cidade     <<", Estado :"
-            << Pessoa.estado     <<", Telefone :"
-            << Pessoa.telefone   <<", email :"
+       saida <<Pessoa.codigo <<";"
+            << Pessoa.nome       <<";"
+            << Pessoa.cdpessoafis<<";"
+            << Pessoa.celular    <<";"
+            << Pessoa.logradouro <<";"
+            << Pessoa.setor      <<";"
+            << Pessoa.cidade     <<";"
+            << Pessoa.estado     <<";"
+            << Pessoa.telefone   <<";:"
             << Pessoa.email      <<endl;
 
         return saida;
