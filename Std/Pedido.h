@@ -51,7 +51,7 @@ public:
     {
         Pedido* p=new Pedido();
         std::string delimitador=";", atributo;
-        int pos=0;
+        unsigned long pos=0;
 
         atributo = linha.substr(0, linha.find(delimitador));
         p->setnumero(std::stoi(atributo));
