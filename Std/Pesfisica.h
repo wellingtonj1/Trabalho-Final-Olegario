@@ -13,7 +13,7 @@ class Pesfisica : public Pessoa
 private:
     string cdpessoafis;
     string nome;
-    int celular;
+    long celular;
 
 public:
     Pesfisica();
@@ -35,8 +35,8 @@ public:
     bool validacpf(string);
     void setnome(string x){nome=x;}
     string getnome(){return nome;}
-    void setcelular(int num){celular=num;}
-    int getcelular(){return celular;}
+    void setcelular(long num){celular=num;}
+    long getcelular(){return celular;}
 
 };
 #endif // CPF_H

@@ -25,19 +25,20 @@ int main()
     queue<Pedido*> filapedidos;
     Pedido *pedibijeto=nullptr;
     Pedido pedi;
+    long telefone;
 
 
     string nomeArquivolist = "listaitems.txt", delimitador=";", linha;
 
     ifstream arquivoi(nomeArquivolist.c_str());
-    if(!arqfis.is_open())
+    if(arqfis.fail())
     {
         cout<<"--Arquivo Lista nao aberto--"<<endl;
     }
     else
     {
         getline(arquivoi, linha);
-        while(!arquivoi.eof())
+        while(!arquivoi.fail())
         {
             itmbijeto= itmbijeto->criaitem(linha);
             listaItems.push_back(itmbijeto);
@@ -51,14 +52,14 @@ int main()
     string nomeArquivofila = "filapedidos.txt", delimitadorpedidos=";", linhapedi;
 
     ifstream arquivopedids(nomeArquivofila.c_str());
-    if(!arqfis.is_open())
+    if(arqfis.fail())
     {
         cout<<"--Arquivo fila nao aberto--"<<endl;
     }
     else
     {
         getline(arquivopedids, linha);
-        while(!arquivopedids.eof())
+        while(!arquivopedids.fail())
         {
             pedibijeto= pedibijeto->criapedi(linhapedi);
             filapedidos.push(pedibijeto);
@@ -122,8 +123,8 @@ int main()
                             pfis.setemail(auxstr);
 
                             puts("Insira o telefone ");
-                            std::cin>>auxint;
-                            pfis.settelefone(auxint);
+                            std::cin>>telefone;
+                            pfis.settelefone(telefone);
 
                             puts("Insira o cpf");
                             std::cin.ignore();
@@ -135,8 +136,8 @@ int main()
                             pfis.setnome(auxstr);
 
                             puts("Insira o celular");
-                            std::cin>>auxint;
-                            pfis.setcelular(auxint);
+                            std::cin>>telefone;
+                            pfis.setcelular(telefone);
 
                             puts("Insira o numero do pedido");
                             std::cin>>auxint;
@@ -161,7 +162,9 @@ int main()
                             pedi.setvalortotal(itm.getvalortotal());
 
                             puts("Insira o nome do Produto pedido");
+                            std::cin.ignore();
                             std::getline(std::cin,auxstr);
+
 
                             pedi.setitem(&itm);
                             filapedidos.push(&pedi);
@@ -210,9 +213,8 @@ int main()
                             pjuri.setemail(auxstr);
 
                             puts("Insira o telefone ");
-
-                            std::cin>>auxint;
-                            pjuri.settelefone(auxint);
+                            std::cin>>telefone;
+                            pjuri.settelefone(telefone);
 
                             puts("Insira o cnpj");
                             std::cin.ignore();

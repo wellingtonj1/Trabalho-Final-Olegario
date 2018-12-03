@@ -39,6 +39,7 @@ public:
     void setstatus(std::string status){ this->status=status;}
     std::string getstatus(){return status;}
     void setdata(){data=QDate::currentDate();}
+    void setdata(int y,int m,int d);
     std::string getdata();
     void setitem(Item *aux){ objitem=*aux;}
     void setcliente(std::string x)
@@ -60,6 +61,12 @@ public:
 
         atributo = linha.substr(0, linha.find(delimitador));
         p->setstatus(atributo);
+        pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        atributo.erase();
+
+        atributo = linha.substr(0, linha.find(delimitador));
+        p->setdata();
         pos=atributo.length()+1;
         linha = linha.substr(pos);
         atributo.erase();
