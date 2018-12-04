@@ -10,12 +10,13 @@ private:
     std::string objproduto;
     int quantidade;
     float pcounitario,valortotal; //pcounitario = Preço unitario;
+    Produto* busca;
 
 
 public:
     Item();
     void setproduto(std::string aux){objproduto=aux;}
-
+    bool buscaprod(Produto* aux);
     int getquanti() { return quantidade;}
     float getpcounitario() { return pcounitario;}
     float getvalortotal() { return valortotal;}

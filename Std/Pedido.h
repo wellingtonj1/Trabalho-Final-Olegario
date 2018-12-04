@@ -4,7 +4,7 @@
 #include <queue>
 #include <QDate>
 #include "Item.h"
-
+#include <iostream>
 
 class Pedido: public Pessoa
 {

@@ -10,15 +10,16 @@
 
 int main()
 {
-    int escolha=0,choose=0;
+    int escolha,choose;
     Pessoa pess;
     Pesfisica pfis;
     Juridica pjuri;
-    Produto prod;
     std::string auxstr;
     int auxint;
     float auxfloat;
     fstream arqfis,arqjuri,arqprod,arqpedi,arquivolist;
+    list<Produto> plist;
+    Produto prod;
     list<Item*> listaItems;
     Item* itmbijeto=nullptr;
     Item itm;
@@ -40,13 +41,14 @@ int main()
         getline(arquivoi, linha);
         while(!arquivoi.fail())
         {
+            throw std::invalid_argument("Invalid syntax.");
             itmbijeto= itmbijeto->criaitem(linha);
             listaItems.push_back(itmbijeto);
             itmbijeto=nullptr;
             getline(arquivoi, linha);
         }
         arquivoi.close();
-        cout<<"==Arquivo lido com sucesso=="<<endl;
+        cout<<"==Arquivo Lista lido com sucesso=="<<endl;
     }
 
     string nomeArquivofila = "filapedidos.txt", delimitadorpedidos=";", linhapedi;
@@ -61,20 +63,27 @@ int main()
         getline(arquivopedids, linha);
         while(!arquivopedids.fail())
         {
-            pedibijeto= pedibijeto->criapedi(linhapedi);
-            filapedidos.push(pedibijeto);
-            pedibijeto=nullptr;
-            getline(arquivopedids,linhapedi);
+            try
+            {
+                pedibijeto= pedibijeto->criapedi(linhapedi);
+            }
+            catch(invalid_argument)
+            {
+                filapedidos.push(pedibijeto);
+                pedibijeto=nullptr;
+                getline(arquivopedids,linhapedi);
+            }
 
         }
         arquivoi.close();
-        cout<<"==Arquivo lido com sucesso=="<<endl;
+        cout<<"==Arquivo Fila lido com sucesso=="<<endl;
     }
 
 
 
     do
     {
+        choose=escolha=0;
         puts("1-Inserir ou remover cliente");
         puts("2-Inserir produto");
         puts("0-Sair");
@@ -85,16 +94,17 @@ int main()
             case 1:
 
                 puts("1 - Fazer pedido para uma Pessoa Fisica ");
-                puts("2 - Fazer pedido para uma Pessoa Juridica \n0 - Para sair");
+                puts("2 - Fazer pedido para uma Pessoa Juridica ");
                 puts("3 - Excluir pessoa Fisica ");
-                puts("4 - Excluir pessoa Juridica ");
+                puts("4 - Excluir pessoa Juridica \n0 - Para sair");
                 std::cin>>escolha;
                 switch (escolha)
                 {
                     case 1:
 
-                        arqfis.open("Pedidos Fis.txt",ios::out|ios::in|ios::app);
+                        arqfis.open("Pesssoas Fis.txt",ios::out|ios::in|ios::app);
                         arqpedi.open("filapedidos.txt",ios::out|ios::in|ios::app);
+                        arquivolist.open("listaitems.txt",ios::out|ios::in|ios::app);
                         if(arqfis.is_open())
                         {
                             if(arqpedi.is_open())
@@ -153,29 +163,35 @@ int main()
 
                                 pedi.setdata();
 
-                                puts("Insira a quantidade de Itens");
-                                std::cin>>auxint;
-                                itm.setquanti(auxint);
+                                if(arquivolist.is_open())
+                                {
+                                    puts("Insira a quantidade de Itens");
+                                    std::cin>>auxint;
+                                    itm.setquanti(auxint);
 
-                                puts("Insira o preço unitario do item");
-                                std::cin.ignore();
-                                std::cin>>auxfloat;
-                                itm.setpcounitario(auxfloat);
-                                itm.setvalortotal();
-                                pedi.setvalortotal(itm.getvalortotal());
+                                    puts("Insira o preço unitario do item");
+                                    std::cin.ignore();
+                                    std::cin>>auxfloat;
+                                    itm.setpcounitario(auxfloat);
+                                    itm.setvalortotal();
+                                    pedi.setvalortotal(itm.getvalortotal());
 
-                                puts("Insira o nome do Produto pedido");
-                                std::cin.ignore();
-                                std::getline(std::cin,auxstr);
+                                    puts("Insira o nome do Produto pedido");
+                                    std::cin.ignore();
+                                    std::getline(std::cin,auxstr);
+
+                                    //itm.buscaprod() precisa buscar o item para saber se ele existe.
 
 
-                                pedi.setitem(&itm);
-                                filapedidos.push(&pedi);
-                                listaItems.push_back(&itm);
 
-                                arqpedi<<pedi;
-                                arqfis<<pfis;
-                                arqfis.close();
+                                    pedi.setitem(&itm);
+                                    filapedidos.push(&pedi);
+                                    listaItems.push_back(&itm);
+
+                                    arqpedi<<pedi;
+                                    arqfis<<pfis;
+                                    arqfis.close();
+                                }
                             }
                         }
                         else
@@ -187,7 +203,7 @@ int main()
                     case 2:
 
 
-                        arqjuri.open("Pedidos Juri.txt",ios::out|ios::in|ios::app);
+                        arqjuri.open("Pessoas Juri.txt",ios::out|ios::in|ios::app);
                         arqpedi.open("filapedidos.txt",ios::out|ios::in|ios::app);
                         if(arqjuri.is_open())
                         {
@@ -247,8 +263,6 @@ int main()
 
                                 pedi.setdata();
 
-
-
                                 puts("Insira a quantidade de Itens");
                                 std::cin>>auxint;
                                 itm.setquanti(auxint);
@@ -259,7 +273,13 @@ int main()
                                 itm.setpcounitario(auxfloat);
                                 itm.setvalortotal();
 
-                                listaItems.push_back(&itm);
+                                for(auto i=plist.begin();i!=plist.end();i++)
+                                {
+
+                                    listaItems.push_back(&itm);
+                                }
+
+
                                 pedi.setitem(&itm);
                                 listaItems.push_back(&itm);
 
@@ -275,6 +295,7 @@ int main()
                         }
 
                         break;
+
 
                     default:
 
@@ -304,6 +325,7 @@ int main()
                     std::cin>>auxint;
                     prod.setQuantidade(auxint);
 
+                    plist.push_back(prod);
                     arqprod<<prod;
                     arqprod.close();
 
@@ -319,6 +341,6 @@ int main()
                 break;
         }
 
-    }while(escolha!=0&&choose!=0);
+    }while(escolha!=0||choose!=0);
 
 }
