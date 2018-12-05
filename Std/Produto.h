@@ -14,8 +14,8 @@ public:
     Produto();
     friend ostream& operator << (ostream& saida,Produto &Product)
     {
-        saida<<Product.codigo<<";"
-             <<Product.descricao<<";"
+        saida<<Product.descricao<<";"
+             <<Product.codigo<<";"
              <<Product.preco<<";"
              <<Product.quantidade<<std::endl;
 

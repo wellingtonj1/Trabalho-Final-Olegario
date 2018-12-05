@@ -2,6 +2,8 @@
 #define ITEM_H
 #include <list>
 #include "Produto.h"
+#include <fstream>
+#include <iostream>
 
 class Item
 {
@@ -10,19 +12,19 @@ private:
     std::string objproduto;
     int quantidade;
     float pcounitario,valortotal; //pcounitario = Preço unitario;
-    Produto* busca;
 
 
 public:
     Item();
-    void setproduto(std::string aux){objproduto=aux;}
-    bool buscaprod(Produto* aux);
-    int getquanti() { return quantidade;}
+    bool buscaprod(std::string aux);
+    std::string getdescriprod(){return objproduto;}
+    int getquanti(){ return quantidade;}
     float getpcounitario() { return pcounitario;}
     float getvalortotal() { return valortotal;}
     void setquanti(int x) { quantidade=x;}
     void setpcounitario(float x) { pcounitario=x;}
     void setvalortotal() { valortotal=pcounitario*quantidade;}    
+    void setdesc(std::string x) {objproduto=x;}
     Item* criaitem(std::string linha)
     {
         Item* p=new Item();
@@ -46,8 +48,14 @@ public:
         return p;
 
     }
+    friend ostream& operator << (ostream& saida,Item& it)
+    {
+        saida<<it.getquanti()<<";"
+             <<it.getpcounitario()<<";"
+             <<it.getvalortotal()<<std::endl;
 
-
+        return saida;
+    }
 
 };
 

@@ -50,7 +50,7 @@ public:
     Pedido* criapedi(std::string linha)
     {
         Pedido* p=new Pedido();
-        std::string delimitador=";", atributo;
+        std::string delimitador=";", atributo,auxano,auxmes;
         unsigned long pos=0;
 
         atributo = linha.substr(0, linha.find(delimitador));
@@ -65,9 +65,15 @@ public:
         linha = linha.substr(pos);
         atributo.erase();
 
-        atributo = linha.substr(0, linha.find(delimitador));
-        p->setdata();
+        atributo = linha.substr(0, linha.find("/"));
         pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        auxmes = linha.substr(0,linha.find("/"));
+        pos =auxmes.length()+1;
+        linha = linha.substr(pos);
+        auxano = linha.substr(0,linha.find(delimitador));
+        p->setdata(std::stoi(atributo),std::stoi(auxmes),std::stoi(auxano));
+        pos =auxano.length()+1;
         linha = linha.substr(pos);
         atributo.erase();
 

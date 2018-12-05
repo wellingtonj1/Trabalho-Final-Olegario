@@ -7,7 +7,7 @@
 #include <queue>
 #include <fstream>
 //arq : CLIENTE , ITEM DE PEDIDO , PRODUTO , PEDIDO
-
+// Release one;
 int main()
 {
     int escolha,choose;
@@ -165,6 +165,12 @@ int main()
 
                                 if(arquivolist.is_open())
                                 {
+
+                                    auxstr="";
+                                    puts("Insira o nome do Produto pedido");
+                                    std::getline(std::cin,auxstr);
+                                    itm.buscaprod(auxstr);
+
                                     puts("Insira a quantidade de Itens");
                                     std::cin>>auxint;
                                     itm.setquanti(auxint);
@@ -176,18 +182,11 @@ int main()
                                     itm.setvalortotal();
                                     pedi.setvalortotal(itm.getvalortotal());
 
-                                    puts("Insira o nome do Produto pedido");
-                                    std::cin.ignore();
-                                    std::getline(std::cin,auxstr);
-
-                                    //itm.buscaprod() precisa buscar o item para saber se ele existe.
-
-
-
                                     pedi.setitem(&itm);
                                     filapedidos.push(&pedi);
                                     listaItems.push_back(&itm);
 
+                                    arquivolist<<itm;
                                     arqpedi<<pedi;
                                     arqfis<<pfis;
                                     arqfis.close();
@@ -205,6 +204,7 @@ int main()
 
                         arqjuri.open("Pessoas Juri.txt",ios::out|ios::in|ios::app);
                         arqpedi.open("filapedidos.txt",ios::out|ios::in|ios::app);
+                        arquivolist.open("listaitems.txt",ios::out|ios::in|ios::app);
                         if(arqjuri.is_open())
                         {
                             if(arqpedi.is_open())
@@ -263,31 +263,35 @@ int main()
 
                                 pedi.setdata();
 
-                                puts("Insira a quantidade de Itens");
-                                std::cin>>auxint;
-                                itm.setquanti(auxint);
-
-                                puts("Insira o preço unitario do item");
-                                std::cin.ignore();
-                                std::cin>>auxfloat;
-                                itm.setpcounitario(auxfloat);
-                                itm.setvalortotal();
-
-                                for(auto i=plist.begin();i!=plist.end();i++)
+                                if(arquivolist.is_open())
                                 {
 
+                                    auxstr="";
+                                    puts("Insira o nome do Produto pedido");
+                                    std::getline(std::cin,auxstr);
+                                    itm.buscaprod(auxstr);
+
+                                    puts("Insira a quantidade de Itens");
+                                    std::cin>>auxint;
+                                    itm.setquanti(auxint);
+
+                                    puts("Insira o preço unitario do item");
+                                    std::cin.ignore();
+                                    std::cin>>auxfloat;
+                                    itm.setpcounitario(auxfloat);
+                                    itm.setvalortotal();
+                                    pedi.setvalortotal(itm.getvalortotal());
+
+                                    pedi.setitem(&itm);
+                                    filapedidos.push(&pedi);
                                     listaItems.push_back(&itm);
+
+                                    arquivolist<<itm;
+                                    arqpedi<<pedi;
+                                    arqjuri<<pjuri;
+                                    arqjuri.close();
                                 }
-
-
-                                pedi.setitem(&itm);
-                                listaItems.push_back(&itm);
-
-                                arqpedi<<pedi;
-                                arqjuri<<pjuri;
-                                arqjuri.close();
                             }
-
                         }
                         else
                         {
