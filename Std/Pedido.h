@@ -39,7 +39,7 @@ public:
     float getvalortotal(){return valortotal;}
     void setstatus(std::string status){ this->status=status;}
     std::string getstatus(){return status;}
-    void setdata();//{data=QDate::currentDate();}
+    void setdata();{data=QDate::currentDate();}
     void setdata(int y,int m,int d);
     std::string getdata();
     void setitem(Item *aux){ objitem=*aux;}
