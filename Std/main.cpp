@@ -170,54 +170,53 @@ int main()
                         arqjuri.open("Pessoas Juri.txt",ios::out|ios::in|ios::app);
                         if(arqjuri.is_open())
                         {
-                            if(arqpedi.is_open())
-                            {
-                                cin.ignore();
-                                puts("Insira o codigo ");
-                                std::getline(std::cin,auxstr);
-                                pjuri.setcodigo(auxstr);
 
-                                puts("Insira o logradouro");
-                                std::getline(std::cin,auxstr);
-                                pjuri.setlogradouro(auxstr);
+                            cin.ignore();
+                            puts("Insira o codigo ");
+                            std::getline(std::cin,auxstr);
+                            pjuri.setcodigo(auxstr);
 
-                                puts("Insira o setor ");
-                                std::getline(std::cin,auxstr);
-                                pjuri.setsetor(auxstr);
+                            puts("Insira o logradouro");
+                            std::getline(std::cin,auxstr);
+                            pjuri.setlogradouro(auxstr);
 
-                                puts("Insira o cidade");
-                                std::getline(std::cin,auxstr);
-                                pjuri.setcidade(auxstr);
+                            puts("Insira o setor ");
+                            std::getline(std::cin,auxstr);
+                            pjuri.setsetor(auxstr);
 
-                                puts("Insira o estado");
-                                std::getline(std::cin,auxstr);
-                                pjuri.setestado(auxstr);
+                            puts("Insira o cidade");
+                            std::getline(std::cin,auxstr);
+                            pjuri.setcidade(auxstr);
 
-                                puts("Insira o email");
-                                std::getline(std::cin,auxstr);
-                                pjuri.setemail(auxstr);
+                            puts("Insira o estado");
+                            std::getline(std::cin,auxstr);
+                            pjuri.setestado(auxstr);
 
-                                puts("Insira o telefone ");
-                                std::cin>>telefone;
-                                pjuri.settelefone(telefone);
+                            puts("Insira o email");
+                            std::getline(std::cin,auxstr);
+                            pjuri.setemail(auxstr);
 
-                                puts("Insira o cnpj");
-                                std::cin.ignore();
-                                std::getline(std::cin,auxstr);
-                                pjuri.setCnpj(auxstr);
+                            puts("Insira o telefone ");
+                            std::cin>>telefone;
+                            pjuri.settelefone(telefone);
 
-                                puts("Insira o nome do contato");
-                                std::getline(std::cin,auxstr);
-                                pjuri.setNomeContato(auxstr);
+                            puts("Insira o cnpj");
+                            std::cin.ignore();
+                            std::getline(std::cin,auxstr);
+                            pjuri.setCnpj(auxstr);
 
-                                puts("Insira a razão social");
-                                std::getline(std::cin,auxstr);
-                                pjuri.setRazaoSocial(auxstr);
-                                
-                                arqjuri<<pjuri;
-                                arqjuri.close();
-                                
-                            }
+                            puts("Insira o nome do contato");
+                            std::getline(std::cin,auxstr);
+                            pjuri.setNomeContato(auxstr);
+
+                            puts("Insira a razão social");
+                            std::getline(std::cin,auxstr);
+                            pjuri.setRazaoSocial(auxstr);
+
+                            arqjuri<<pjuri;
+                            arqjuri.close();
+
+                            
                         }
                         else
                         {
