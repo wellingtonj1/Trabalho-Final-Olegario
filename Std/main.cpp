@@ -168,8 +168,6 @@ int main()
 
 
                         arqjuri.open("Pessoas Juri.txt",ios::out|ios::in|ios::app);
-                        arqpedi.open("filapedidos.txt",ios::out|ios::in|ios::app);
-                        arquivolist.open("listaitems.txt",ios::out|ios::in|ios::app);
                         if(arqjuri.is_open())
                         {
                             if(arqpedi.is_open())
@@ -178,7 +176,6 @@ int main()
                                 puts("Insira o codigo ");
                                 std::getline(std::cin,auxstr);
                                 pjuri.setcodigo(auxstr);
-                                pedi.setcliente(auxstr);
 
                                 puts("Insira o logradouro");
                                 std::getline(std::cin,auxstr);
@@ -216,46 +213,10 @@ int main()
                                 puts("Insira a razão social");
                                 std::getline(std::cin,auxstr);
                                 pjuri.setRazaoSocial(auxstr);
-
-                                puts("Insira o numero do pedido");
-                                std::cin>>auxint;
-                                pedi.setnumero(auxint);
-
-                                puts("Insira o status do pedido");
-                                std::cin.ignore();
-                                std::getline(std::cin,auxstr);
-                                pedi.setstatus(auxstr);
-
-                                //pedi.setdata();
-
-                                if(arquivolist.is_open())
-                                {
-
-                                    auxstr="";
-                                    puts("Insira o nome do Produto pedido");
-                                    std::getline(std::cin,auxstr);
-                                    itm.buscaprod(auxstr);
-
-                                    puts("Insira a quantidade de Itens");
-                                    std::cin>>auxint;
-                                    itm.setquanti(auxint);
-
-                                    puts("Insira o preço unitario do item");
-                                    std::cin.ignore();
-                                    std::cin>>auxfloat;
-                                    itm.setpcounitario(auxfloat);
-                                    itm.setvalortotal();
-                                    pedi.setvalortotal(itm.getvalortotal());
-
-                                    pedi.setitem(&itm);
-                                    filapedidos.push(&pedi);
-                                    listaItems.push_back(&itm);
-
-                                    arquivolist<<itm;
-                                    arqpedi<<pedi;
-                                    arqjuri<<pjuri;
-                                    arqjuri.close();
-                                }
+                                
+                                arqjuri<<pjuri;
+                                arqjuri.close();
+                                
                             }
                         }
                         else
@@ -310,7 +271,7 @@ int main()
                                 std::getline(std::cin,auxstr);
                                 pedi.setstatus(auxstr);
 
-                                //pedi.setdata();
+                                pedi.setdata();
 
                                 if(arquivolist.is_open())
                                 {
