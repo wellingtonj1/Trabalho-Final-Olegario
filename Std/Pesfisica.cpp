@@ -23,6 +23,15 @@ bool Pesfisica::validacpf(std::string x)
             std::string u=x.substr(i,1);
             aux[i]=std::stoi(u);
         }
+        for(int z=0;z!=x.length();z++)
+        {
+            if(aux[z]==aux[z+1]&&aux[z]==aux[z+2])
+            {
+                cdpessoafis=x;
+                std::cout<<"\nCpf invalido!\n";
+                return false;
+            }
+        }
         int resmultip1=0;
         z=10;
         for(y=0;y<9;y++)

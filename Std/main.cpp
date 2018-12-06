@@ -41,7 +41,6 @@ int main()
         getline(arquivoi, linha);
         while(!arquivoi.fail())
         {
-            throw std::invalid_argument("Invalid syntax.");
             itmbijeto= itmbijeto->criaitem(linha);
             listaItems.push_back(itmbijeto);
             itmbijeto=nullptr;
@@ -85,7 +84,9 @@ int main()
     {
         choose=escolha=0;
         puts("1-Inserir ou remover cliente");
-        puts("2-Inserir produto");
+        puts("2-Inserir Produto");
+        puts("3-Remover Produto");
+        puts("4-Mostrar Produtos");
         puts("0-Sair");
         std::cin>>choose;
 
@@ -93,10 +94,15 @@ int main()
         {
             case 1:
 
-                puts("1 - Fazer pedido para uma Pessoa Fisica ");
-                puts("2 - Fazer pedido para uma Pessoa Juridica ");
+                puts("1 - Criar uma Pessoa Fisica ");
+                puts("2 - Criar uma Pessoa Juridica ");
                 puts("3 - Excluir pessoa Fisica ");
-                puts("4 - Excluir pessoa Juridica \n0 - Para sair");
+                puts("4 - Excluir pessoa Juridica");
+                puts("5 - Realizar Pedido Pessoa Fisica");
+                puts("6 - Realizar Pedido Pessoa Juridica");
+                puts("7 - Mostrar Pessoas Fisica");
+                puts("8 - Mostrar Pessoas Juridica");
+                puts("0 - Para sair");
                 std::cin>>escolha;
                 switch (escolha)
                 {
@@ -301,6 +307,52 @@ int main()
                         break;
 
 
+                    case 3:
+
+                        puts("Digite o codigo da Pessoa Fisica que desejas excluir: ");
+                        std::cin.ignore();
+                        std::getline(std::cin,auxstr);
+                        pfis.removepesfis(auxstr);
+
+                        break;
+
+                    case 4:
+
+                        puts("Digite o codigo da Pessoa Juridica que desejas excluir: ");
+                        std::cin.ignore();
+                        std::getline(std::cin,auxstr);
+                        pjuri.removepesjuri(auxstr);
+
+
+                        break;
+
+                    case 5:
+
+                        puts("Insira o nome da Pessoa Fisica para a qual desejas realizar o pedido");
+                        std::cin.ignore();
+                        std::getline(std::cin,auxstr);
+                        pfis.existefis(auxstr);
+
+                        break;
+
+                    case 6:
+
+                        puts("Insira o nome da Pessoa Juridica para a qual desejas realizar o pedido");
+                        std::cin.ignore();
+                        std::getline(std::cin,auxstr);
+
+                        break;
+
+                    case 7:
+                        pfis.mostrarfis();
+
+                        break;
+
+                    case 8:
+                        pjuri.mostrarjuri();
+
+                        break;
+
                     default:
 
                         break;
@@ -339,6 +391,18 @@ int main()
                     puts("Arquivo não aberto");
                 }
                 break;
+
+            case 3:
+
+                puts("Insira a descrição do produto");
+                std::cin.ignore();
+                std::getline(std::cin,auxstr);
+                prod.removeproduto(auxstr);
+
+                break;
+
+            case 4:
+
 
             default:
 

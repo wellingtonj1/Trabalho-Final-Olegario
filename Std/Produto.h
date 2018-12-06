@@ -1,6 +1,8 @@
 #ifndef PRODUTO_H
 #define PRODUTO_H
 #include<QString>
+#include<iostream>
+#include<fstream>
 using namespace std;
 
 class Produto
@@ -31,8 +33,45 @@ public:
     string getDescricao(){return descricao;}
     float getPreco(){return preco;}
     int getQuantidade(){return quantidade;}
-
-
+    void removeproduto(std::string x)
+    {
+        std::string aux,desc;
+        fstream arqprod,arqaux;
+        arqprod.open("Produtos.txt",ios::out|ios::in|ios::app);
+        arqaux.open("Produtos aux.txt",ios::out|ios::in|ios::app);
+        if(arqprod.is_open())
+        {
+            while(!arqprod.eof())
+            {
+                getline(arqprod,aux);
+                desc= aux.substr(0,aux.find(";"));
+                if(x==desc)
+                {
+                    puts("Produto removido");
+                }
+                else
+                {
+                    arqaux<<aux;
+                }
+            }
+            remove("Produtos.txt");
+            rename("Produtos aux.txt","Produtos.txt");
+        }
+    }
+    void mostrarprods()
+    {
+        std::string aux;
+        fstream arqprod;
+        arqprod.open("Produtos.txt",ios::out|ios::in|ios::app);
+        if(arqprod.is_open())
+        {
+            while(!arqprod.eof())
+            {
+                getline(arqprod,aux);
+                std::cout<<aux;
+            }
+        }
+    }
 };
 
 #endif // PRODUTO_H
