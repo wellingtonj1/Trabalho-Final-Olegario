@@ -11,7 +11,7 @@ private:
 
     std::string objproduto;
     int quantidade;
-    float pcounitario,valortotal; //pcounitario = Preço unitario;
+    float pcounitario,valortotal; //quantidade de produtos pço de cada produto valor total é o pço x quantidade;
 
 
 public:
@@ -25,6 +25,7 @@ public:
     void setpcounitario(float x) { pcounitario=x;}
     void setvalortotal() { valortotal=pcounitario*quantidade;}    
     void setdesc(std::string x) {objproduto=x;}
+    float rtpreco(std::string aux);
     Item* criaitem(std::string linha)
     {
         Item* p=new Item();

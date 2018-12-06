@@ -7,7 +7,7 @@
 #include <queue>
 #include <fstream>
 //arq : CLIENTE , ITEM DE PEDIDO , PRODUTO , PEDIDO
-// Release one;
+// Release Final!;
 int main()
 {
     int escolha,choose;
@@ -98,10 +98,9 @@ int main()
                 puts("2 - Criar uma Pessoa Juridica ");
                 puts("3 - Excluir pessoa Fisica ");
                 puts("4 - Excluir pessoa Juridica");
-                puts("5 - Realizar Pedido Pessoa Fisica");
-                puts("6 - Realizar Pedido Pessoa Juridica");
-                puts("7 - Mostrar Pessoas Fisica");
-                puts("8 - Mostrar Pessoas Juridica");
+                puts("5 - Realizar Pedido ");
+                puts("6 - Mostrar Pessoas Fisica");
+                puts("7 - Mostrar Pessoas Juridica");
                 puts("0 - Para sair");
                 std::cin>>escolha;
                 switch (escolha)
@@ -109,95 +108,55 @@ int main()
                     case 1:
 
                         arqfis.open("Pesssoas Fis.txt",ios::out|ios::in|ios::app);
-                        arqpedi.open("filapedidos.txt",ios::out|ios::in|ios::app);
-                        arquivolist.open("listaitems.txt",ios::out|ios::in|ios::app);
                         if(arqfis.is_open())
                         {
-                            if(arqpedi.is_open())
-                            {
-                                cin.ignore();
-                                puts("Insira o codigo ");
-                                std::getline(std::cin,auxstr);
-                                pfis.setcodigo(auxstr);
-                                pedi.setcliente(auxstr);
 
-                                puts("Insira o logradouro");
-                                std::getline(std::cin,auxstr);
-                                pfis.setlogradouro(auxstr);
 
-                                puts("Insira o setor ");
-                                std::getline(std::cin,auxstr);
-                                pfis.setsetor(auxstr);
+                            cin.ignore();
+                            puts("Insira o codigo ");
+                            std::getline(std::cin,auxstr);
+                            pfis.setcodigo(auxstr);
+                            pedi.setcliente(auxstr);
 
-                                puts("Insira o cidade");
-                                std::getline(std::cin,auxstr);
-                                pfis.setcidade(auxstr);
+                            puts("Insira o logradouro");
+                            std::getline(std::cin,auxstr);
+                            pfis.setlogradouro(auxstr);
 
-                                puts("Insira o estado");
-                                std::getline(std::cin,auxstr);
-                                pfis.setestado(auxstr);
+                            puts("Insira o setor ");
+                            std::getline(std::cin,auxstr);
+                            pfis.setsetor(auxstr);
 
-                                puts("Insira o email");
-                                std::getline(std::cin,auxstr);
-                                pfis.setemail(auxstr);
+                            puts("Insira o cidade");
+                            std::getline(std::cin,auxstr);
+                            pfis.setcidade(auxstr);
 
-                                puts("Insira o telefone ");
-                                std::cin>>telefone;
-                                pfis.settelefone(telefone);
+                            puts("Insira o estado");
+                            std::getline(std::cin,auxstr);
+                            pfis.setestado(auxstr);
 
-                                puts("Insira o cpf");
-                                std::cin.ignore();
-                                std::getline(std::cin,auxstr);
-                                pfis.validacpf(auxstr);
+                            puts("Insira o email");
+                            std::getline(std::cin,auxstr);
+                            pfis.setemail(auxstr);
 
-                                puts("Insira o nome");
-                                std::getline(std::cin,auxstr);
-                                pfis.setnome(auxstr);
+                            puts("Insira o telefone ");
+                            std::cin>>telefone;
+                            pfis.settelefone(telefone);
 
-                                puts("Insira o celular");
-                                std::cin>>telefone;
-                                pfis.setcelular(telefone);
+                            puts("Insira o cpf");
+                            std::cin.ignore();
+                            std::getline(std::cin,auxstr);
+                            pfis.validacpf(auxstr);
 
-                                puts("Insira o numero do pedido");
-                                std::cin>>auxint;
-                                pedi.setnumero(auxint);
+                            puts("Insira o nome");
+                            std::getline(std::cin,auxstr);
+                            pfis.setnome(auxstr);
 
-                                puts("Insira o status do pedido");
-                                std::cin.ignore();
-                                std::getline(std::cin,auxstr);
-                                pedi.setstatus(auxstr);
+                            puts("Insira o celular");
+                            std::cin>>telefone;
+                            pfis.setcelular(telefone);
 
-                                pedi.setdata();
-
-                                if(arquivolist.is_open())
-                                {
-
-                                    auxstr="";
-                                    puts("Insira o nome do Produto pedido");
-                                    std::getline(std::cin,auxstr);
-                                    itm.buscaprod(auxstr);
-
-                                    puts("Insira a quantidade de Itens");
-                                    std::cin>>auxint;
-                                    itm.setquanti(auxint);
-
-                                    puts("Insira o preço unitario do item");
-                                    std::cin.ignore();
-                                    std::cin>>auxfloat;
-                                    itm.setpcounitario(auxfloat);
-                                    itm.setvalortotal();
-                                    pedi.setvalortotal(itm.getvalortotal());
-
-                                    pedi.setitem(&itm);
-                                    filapedidos.push(&pedi);
-                                    listaItems.push_back(&itm);
-
-                                    arquivolist<<itm;
-                                    arqpedi<<pedi;
-                                    arqfis<<pfis;
-                                    arqfis.close();
-                                }
-                            }
+                            arqfis<<pfis;
+                            arqfis.close();
                         }
                         else
                         {
@@ -267,7 +226,7 @@ int main()
                                 std::getline(std::cin,auxstr);
                                 pedi.setstatus(auxstr);
 
-                                pedi.setdata();
+                                //pedi.setdata();
 
                                 if(arquivolist.is_open())
                                 {
@@ -328,27 +287,69 @@ int main()
 
                     case 5:
 
-                        puts("Insira o nome da Pessoa Fisica para a qual desejas realizar o pedido");
-                        std::cin.ignore();
-                        std::getline(std::cin,auxstr);
-                        pfis.existefis(auxstr);
+                        arqpedi.open("filapedidos.txt",ios::out|ios::in|ios::app);
+                        arquivolist.open("listaitems.txt",ios::out|ios::in|ios::app);
+                        if(arqpedi.is_open())
+                        {
+                            if(arquivolist.is_open())
+                            {
+                                puts("Insira o codigo da PessoaFisica ou a Razão social, para a qual desejas realizar o pedido");
+                                std::cin.ignore();
+                                std::getline(std::cin,auxstr);
+                                if(pfis.existefis(auxstr)||pjuri.existejuri(auxstr))
+                                {
+                                    pedi.setcliente(auxstr);
+                                }
+
+                                puts("Insira o numero do pedido");
+                                std::cin>>auxint;
+                                pedi.setnumero(auxint);
+
+                                puts("Insira o status do pedido");
+                                std::cin.ignore();
+                                std::getline(std::cin,auxstr);
+                                pedi.setstatus(auxstr);
+
+                                //pedi.setdata();
+
+                                if(arquivolist.is_open())
+                                {
+
+                                    auxstr="";
+                                    puts("Insira o nome do Produto desejado ");
+                                    std::getline(std::cin,auxstr);
+                                    itm.buscaprod(auxstr);
+
+                                    puts("Insira a quantidade de Itens");
+                                    std::cin>>auxint;
+                                    itm.setquanti(auxint);
+
+
+                                    itm.setpcounitario(itm.rtpreco(auxstr));
+                                    itm.setvalortotal();
+                                    pedi.setvalortotal(itm.getvalortotal());
+
+                                    pedi.setitem(&itm);
+                                    filapedidos.push(&pedi);
+                                    listaItems.push_back(&itm);
+
+                                    arquivolist<<itm;
+                                    arqpedi<<pedi;
+
+                                }
+                            }
+                        }
 
                         break;
 
                     case 6:
 
-                        puts("Insira o nome da Pessoa Juridica para a qual desejas realizar o pedido");
-                        std::cin.ignore();
-                        std::getline(std::cin,auxstr);
-
-                        break;
-
-                    case 7:
                         pfis.mostrarfis();
 
                         break;
 
-                    case 8:
+                    case 7:
+
                         pjuri.mostrarjuri();
 
                         break;
@@ -403,7 +404,7 @@ int main()
 
             case 4:
 
-
+                prod.mostrarprods();
             default:
 
                 break;

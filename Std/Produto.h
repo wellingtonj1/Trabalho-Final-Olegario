@@ -35,29 +35,47 @@ public:
     int getQuantidade(){return quantidade;}
     void removeproduto(std::string x)
     {
-        std::string aux,desc;
-        fstream arqprod,arqaux;
-        arqprod.open("Produtos.txt",ios::out|ios::in|ios::app);
-        arqaux.open("Produtos aux.txt",ios::out|ios::in|ios::app);
-        if(arqprod.is_open())
+        if(x!="")
         {
-            while(!arqprod.eof())
+            std::string aux,desc;
+            fstream arqprod,arqaux;
+            bool encontrado =false;
+            arqprod.open("Produtos.txt",ios::out|ios::in|ios::app);
+            arqaux.open("Produtos aux.txt",ios::out|ios::in|ios::app);
+            if(arqprod.is_open())
             {
-                getline(arqprod,aux);
-                desc= aux.substr(0,aux.find(";"));
-                if(x==desc)
+                while(!arqprod.eof())
                 {
+                    getline(arqprod,aux);
+                    desc= aux.substr(0,aux.find(";"));
+                    if(x==desc)
+                    {
+                        encontrado =true;
+                    }
+                    else
+                    {
+                       arqaux<<aux;
+                    }
+                }
+                if(encontrado==true)
+                {
+                    remove("Produtos.txt");
+                    rename("Produtos aux.txt","Produtos.txt");
                     puts("Produto removido");
                 }
                 else
                 {
-                    arqaux<<aux;
+                    puts("Nenhum dado encontrado!");
+                    remove("Produtos aux.txt");
                 }
             }
-            remove("Produtos.txt");
-            rename("Produtos aux.txt","Produtos.txt");
+        }
+        else
+        {
+            puts("Nenhum dado Inserido!");
         }
     }
+
     void mostrarprods()
     {
         std::string aux;
@@ -68,7 +86,7 @@ public:
             while(!arqprod.eof())
             {
                 getline(arqprod,aux);
-                std::cout<<aux;
+                cout<<aux<<endl;
             }
         }
     }

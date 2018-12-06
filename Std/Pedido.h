@@ -6,12 +6,12 @@
 #include "Item.h"
 #include <iostream>
 
-class Pedido: public Pessoa
+class Pedido
 {
 private:
     Item objitem;
     int numero;
-    Pessoa cliente;
+    std::string cliente; //cliente = codigo da pessoa juri ou fis
     std::string status;
     QDate data;
     float valortotal;
@@ -21,6 +21,7 @@ public:
     friend ostream& operator << (ostream& saida,Pedido& pedid)
     {
         saida<<pedid.numero<<";"
+             <<pedid.cliente<<";"
              <<pedid.status<<";"
              <<pedid.getdata()<<";"
              <<pedid.valortotal<<";"
@@ -33,18 +34,18 @@ public:
     }
     void setnumero(int x){numero=x;}
     int getnumero(){return numero;}
-    std::string getcliente(){return cliente.getcodigo();}
+    std::string getcliente(){return cliente;}
     void setvalortotal(float x){valortotal=x;}
     float getvalortotal(){return valortotal;}
     void setstatus(std::string status){ this->status=status;}
     std::string getstatus(){return status;}
-    void setdata(){data=QDate::currentDate();}
+    void setdata();//{data=QDate::currentDate();}
     void setdata(int y,int m,int d);
     std::string getdata();
     void setitem(Item *aux){ objitem=*aux;}
     void setcliente(std::string x)
     {
-        cliente.setcodigo(x);
+        cliente =x;
     }
 
     Pedido* criapedi(std::string linha)
@@ -55,6 +56,12 @@ public:
 
         atributo = linha.substr(0, linha.find(delimitador));
         p->setnumero(std::stoi(atributo));
+        pos=atributo.length()+1;
+        linha = linha.substr(pos);
+        atributo.erase();
+
+        atributo = linha.substr(0,linha.find(delimitador));
+        p->setcliente(atributo);
         pos=atributo.length()+1;
         linha = linha.substr(pos);
         atributo.erase();
