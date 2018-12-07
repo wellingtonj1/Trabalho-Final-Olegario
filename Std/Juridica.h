@@ -73,15 +73,17 @@ public:
             {
                 getline(arqjuri,aux);
                 aux= aux.substr(0,aux.find(";"));
-                if(x==codigo)
+                if(x==aux)
                 {
-                    puts("Pessoa encontrada");
+                    puts("Pessoa Juridica encontrada");
                     return true;
                 }
+                else
+                {}
                 aux="";
             }
         }
-        puts("Pessoa não encontrada");
+        puts("Pessoa Juridica não encontrada");
         return false;
     }
     void mostrarjuri()

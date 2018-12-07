@@ -40,9 +40,9 @@ public:
             std::string aux,desc;
             fstream arqprod,arqaux;
             bool encontrado =false;
-            arqprod.open("Produtos.txt",ios::out|ios::in|ios::app);
+            arqprod.open("Produtos.txt",ios::in|ios::app);
             arqaux.open("Produtos aux.txt",ios::out|ios::in|ios::app);
-            if(arqprod.is_open())
+            if(arqprod.is_open()&&arqaux.is_open())
             {
                 while(!arqprod.eof())
                 {
@@ -54,7 +54,7 @@ public:
                     }
                     else
                     {
-                       arqaux<<aux;
+                       arqaux<<aux<<endl;
                     }
                 }
                 if(encontrado==true)

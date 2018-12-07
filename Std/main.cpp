@@ -101,6 +101,8 @@ int main()
                 puts("5 - Realizar Pedido ");
                 puts("6 - Mostrar Pessoas Fisica");
                 puts("7 - Mostrar Pessoas Juridica");
+                puts("8 - Excluir Pedido");
+                puts("9 - Mostrar Pedidos");
                 puts("0 - Para sair");
                 std::cin>>escolha;
                 switch (escolha)
@@ -311,6 +313,26 @@ int main()
                     case 7:
 
                         pjuri.mostrarjuri();
+
+                        break;
+
+                    case 8:
+
+                        puts("Insira o numero do pedido que desejas excluir");
+                        cin.ignore();
+                        cin>>auxint;
+                        try
+                        {
+                            pedi.removepedido(auxint);
+                        }
+                        catch(invalid_argument)
+                        {}
+
+                        break;
+
+                    case 9:
+
+                        pedi.mostrapedidos();
 
                         break;
 

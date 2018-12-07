@@ -6,6 +6,7 @@
 #include <QString>
 #include "Pessoa.h"
 
+
 using namespace std;
 
 class Pesfisica : public Pessoa
@@ -39,15 +40,15 @@ public:
     long getcelular(){return celular;}
     void removepesfis(std::string x)
     {
-        std::string aux,codigo;
-        fstream arqfisica,arqaux;
-        arqfisica.open("Pesssoas Fis.txt",ios::out|ios::in|ios::app);
-        arqaux.open("Pesssoas aux.txt",ios::out|ios::in|ios::app);
-        if(arqfisica.is_open())
+        string aux,codigo;
+        fstream arqjuri,arqaux;
+        arqjuri.open("Pesssoas Fis.txt",ios::out|ios::in|ios::app);
+        arqaux.open("Pesssoas auxfis.txt",ios::out|ios::in|ios::app);
+        if(arqjuri.is_open())
         {
-            while(!arqfisica.eof())
+            while(!arqjuri.eof())
             {
-                getline(arqfisica,aux);
+                getline(arqjuri,aux);
                 codigo= aux.substr(0,aux.find(";"));
                 if(x==codigo)
                 {
@@ -58,8 +59,8 @@ public:
                     arqaux<<aux;
                 }
             }
-            remove("Pessoas Fis.txt");
-            rename("Pessoas aux","Pesssoas Fis.txt");
+            remove("Pesssoas Fis.txt");
+            rename("Pesssoas auxfis.txt","Pesssoas Fis.txt");
         }
     }
     bool existefis(std::string x)
@@ -73,20 +74,22 @@ public:
             {
                 getline(arqfisica,aux);
                 aux= aux.substr(0,aux.find(";"));
-                if(x==codigo)
+                if(x==aux)
                 {
-                    puts("Pessoa encontrada");
+                    puts("Pessoa Fisica encontrada");
                     return true;
                 }
+                else
+                {}
                 aux="";
             }
         }
-        puts("Pessoa não encontrada");
+        puts("Pessoa Fisica não encontrada");
         return false;
     }
     void mostrarfis()
     {
-        std::string aux;
+        string aux;
         fstream arqfisica;
         arqfisica.open("Pesssoas Fis.txt",ios::out|ios::in|ios::app);
         if(arqfisica.is_open())
@@ -94,7 +97,7 @@ public:
             while(!arqfisica.eof())
             {
                 getline(arqfisica,aux);
-                std::cout<<aux<<"\n";
+                cout<<aux<<"\n";
             }
         }
     }

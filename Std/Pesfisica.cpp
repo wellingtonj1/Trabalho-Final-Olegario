@@ -23,7 +23,7 @@ bool Pesfisica::validacpf(std::string x)
             std::string u=x.substr(i,1);
             aux[i]=std::stoi(u);
         }
-        for(int z=0;z!=x.length();z++)
+        for(unsigned int z=0;z!=x.length();z++)
         {
             if(aux[z]==aux[z+1]&&aux[z]==aux[z+2])
             {
