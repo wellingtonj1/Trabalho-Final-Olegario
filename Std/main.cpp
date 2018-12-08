@@ -118,7 +118,7 @@ int main()
                             puts("Insira o codigo ");
                             std::getline(std::cin,auxstr);
                             pfis.setcodigo(auxstr);
-                            pedi.setcliente(auxstr);
+
 
                             puts("Insira o logradouro");
                             std::getline(std::cin,auxstr);
